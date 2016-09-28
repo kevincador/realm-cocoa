@@ -32,7 +32,9 @@
 #import "RLMQueryUtil.hpp"
 #import "RLMRealmUtil.hpp"
 #import "RLMSchema_Private.hpp"
+#if REALM_ENABLE_SYNC
 #import "RLMSyncManager_Private.hpp"
+#endif
 #import "RLMUpdateChecker.hpp"
 #import "RLMUtil.hpp"
 
@@ -336,7 +338,9 @@ REALM_NOINLINE void RLMRealmTranslateException(NSError **error) {
 }
 
 + (void)resetRealmState {
+#if REALM_ENABLE_SYNC
     [RLMSyncManager _resetStateForTesting];
+#endif
     RLMClearRealmCache();
     realm::_impl::RealmCoordinator::clear_cache();
     [RLMRealmConfiguration resetRealmConfigurationState];
