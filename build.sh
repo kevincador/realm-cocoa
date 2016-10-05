@@ -404,6 +404,12 @@ case "$COMMAND" in
         ;;
 
     "reset-object-server")
+		# kill any object servers that are still running
+        (pgrep -f realm-object-server || true) | while read pid; do
+            kill $pid
+        done
+        # Make sure the OS won't fail on deleting the files because 'still in use'
+        sleep 1 
         package="${source_root}/sync"
         for file in "$package"/realm-object-server-*; do
             if [ -d "$file" ]; then
