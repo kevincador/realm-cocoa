@@ -73,8 +73,8 @@ static NSURL *syncDirectoryForChildProcess() {
     return [NSURL URLWithString:@"http://127.0.0.1:9080"];
 }
 
-+ (RLMSyncCredential *)basicCredential:(BOOL)createAccount {
-    return [RLMSyncCredential credentialWithUsername:@"a"
++ (RLMSyncCredential *)basicCredentialWithName:(NSString *)name createAccount:(BOOL)createAccount {
+    return [RLMSyncCredential credentialWithUsername:name
                                             password:@"a"
                                              actions:(createAccount
                                                       ? RLMAuthenticationActionsCreateAccount
@@ -187,7 +187,7 @@ static NSURL *syncDirectoryForChildProcess() {
     self.task = [[NSTask alloc] init];
     self.task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
     self.task.launchPath = @"/bin/sh";
-    self.task.arguments = @[@"build.sh", @"reset-object-server"];
+    self.task.arguments = @[@"build.sh", @"reset-object-server-between-tests"];
     self.task.standardOutput = [NSPipe pipe];
     [self.task launch];
     [self.task waitUntilExit];
