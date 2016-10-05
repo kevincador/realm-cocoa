@@ -119,7 +119,7 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
 }
 
 /// If client B adds objects to a synced Realm, client A should see those objects.
-- (void)testRemoteAddObjects {
+- (void)testAddObjects {
     NSURL *url = REALM_URL();
     RLMSyncUser *user = [self logInUserForCredential:[RLMObjectServerTests basicCredential:self.isParent]
                                               server:[RLMObjectServerTests authServerURL]];
@@ -137,7 +137,7 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
 }
 
 /// If client B deletes objects from a synced Realm, client A should see the effects of that deletion.
-- (void)testRemoteDeleteObjects {
+- (void)testDeleteObjects {
     NSURL *url = REALM_URL();
     RLMSyncUser *user = [self logInUserForCredential:[RLMObjectServerTests basicCredential:self.isParent]
                                               server:[RLMObjectServerTests authServerURL]];
@@ -224,7 +224,7 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
 }
 
 /// A client should be able to open multiple Realms and delete objects from each of them.
-- (void)testMultipleRealmsRemoveObjects {
+- (void)testMultipleRealmsDeleteObjects {
     NSURL *urlA = CUSTOM_REALM_URL(@"a");
     NSURL *urlB = CUSTOM_REALM_URL(@"b");
     NSURL *urlC = CUSTOM_REALM_URL(@"c");
@@ -306,37 +306,13 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
         // NOTE: This sleep should be fine because:
         // - There is currently no API that allows asynchronous coordination for waiting for an upload to begin.
         // - A delay longer than the specified one will not affect the outcome of the test.
-        sleep(1);
+        sleep(2);
         RLMRunChildAndWait();
     } else {
         RLMRealm *r = [self openRealmForURL:url user:user];
         // Wait for download to complete.
         WAIT_FOR_DOWNLOAD(user, url);
         CHECK_COUNT(OBJECT_COUNT, SyncObject, r);
-    }
-}
-
-/// If a client logs out, the session should be immediately terminated.
-- (void)testImmediateSessionTerminationWhenLoggingOut {
-    const NSInteger OBJECT_COUNT = 10000;
-    NSURL *url = [NSURL URLWithString:@"realm://localhost:9080/~/testBasicSync"];
-    // Log in the user.
-    RLMSyncUser *user = [self logInUserForCredential:[RLMObjectServerTests basicCredential:self.isParent]
-                                              server:[RLMObjectServerTests authServerURL]];
-    // Open the Realm
-    RLMRealm *r = [self openRealmForURL:url user:user];
-    if (self.isParent) {
-        [r beginWriteTransaction];
-        for (NSInteger i=0; i<OBJECT_COUNT; i++) {
-            [r addObject:[[SyncObject alloc] initWithValue:@[[NSString stringWithFormat:@"parent-%@", @(i+1)]]]];
-        }
-        [r commitWriteTransaction];
-        [user logOut];
-        CHECK_COUNT(OBJECT_COUNT, SyncObject, r);
-        RLMRunChildAndWait();
-    } else {
-        WAIT_FOR_DOWNLOAD(user, url);
-        CHECK_COUNT(0, SyncObject, r);
     }
 }
 
