@@ -406,7 +406,7 @@ case "$COMMAND" in
     "reset-object-server")
 		# kill any object servers that are still running
         (pgrep -f realm-object-server || true) | while read pid; do
-            kill $pid
+            kill $pid 2>/dev/null
         done
         # Make sure the OS won't fail on deleting the files because 'still in use'
         sleep 1 
