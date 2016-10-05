@@ -196,7 +196,7 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
     XCTAssertTrue([user sessionForURL:urlB].state == RLMSyncSessionStateActive, @"Expected active session for URL B");
     XCTAssertTrue([user sessionForURL:urlC].state == RLMSyncSessionStateActive, @"Expected active session for URL C");
 }
-
+/*
 /// A client should be able to open multiple Realms and add objects to each of them.
 - (void)testMultipleRealmsAddObjects {
     NSURL *urlA = CUSTOM_REALM_URL(@"a");
@@ -294,7 +294,7 @@ static NSURL *makeRealmURL(const char *function, NSString *identifier) {
         CHECK_COUNT(0, SyncObject, realmB);
         CHECK_COUNT(0, SyncObject, realmC);
     }
-}
+} */
 
 #pragma mark - Session Lifetime
 
