@@ -407,13 +407,13 @@ case "$COMMAND" in
         ;;
 
     "reset-object-server-between-tests")
-        kill_object_server
         # Leave the server files alone to avoid 'bad_server_ident' errors
         rm -rf "~/Library/Application Support/xctest"
         rm -rf "~/Library/Application Support/xctest-child"
         exit 0
         ;;
     "reset-object-server")
+        kill_object_server
         package="${source_root}/sync"
         for file in "$package"/realm-object-server-*; do
             if [ -d "$file" ]; then
@@ -421,10 +421,9 @@ case "$COMMAND" in
                 break
             fi
         done
-        rm -rf "~/Library/Application Support/xctest"
-        rm -rf "~/Library/Application Support/xctest-child"
         rm -rf "$package/object-server/root_dir/"
         rm -rf "$package/object-server/temp_dir/"
+        sh build.sh reset-object-server-between-tests
         exit 0
         ;;
 

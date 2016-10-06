@@ -59,15 +59,11 @@
     for (id key in [self activeUsers]) {
         [buffer addObject:[self activeUsers][key]];
     }
-    [[[self activeUsers] allValues] makeObjectsPerformSelector:@selector(logOut)];
+    [self.activeUsers.allValues makeObjectsPerformSelector:@selector(logOut)];
     NSURL *metadataURL = [self.fileManager fileURLForMetadata];
 
     // Destroy the metadata Realm.
-    // FIXME: replace this with the appropriate call to `[RLMSyncFileManager deleteRealmAtPath:]` once that code is in.
-    NSFileManager *manager = [NSFileManager defaultManager];
-    [manager removeItemAtURL:metadataURL error:nil];
-    [manager removeItemAtURL:[metadataURL URLByAppendingPathExtension:@"lock"] error:nil];
-    [manager removeItemAtURL:[metadataURL URLByAppendingPathExtension:@"management"] error:nil];
+    [[[RLMTestCase alloc] init] deleteRealmFileAtURL:metadataURL];
 }
 
 @end

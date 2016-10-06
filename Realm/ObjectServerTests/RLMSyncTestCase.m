@@ -40,6 +40,7 @@
 @implementation SyncObject
 @end
 
+static NSTask *s_task;
 static RLMSyncManager *s_managerForTest;
 
 static NSURL *syncDirectoryForChildProcess() {
@@ -121,20 +122,20 @@ static NSURL *syncDirectoryForChildProcess() {
     [[RLMSyncManager sharedManager] setSessionCompletionNotifier:basicBlock];
     RLMRealmConfiguration *c = [[RLMRealmConfiguration defaultConfiguration] copy];
     c.syncConfiguration = [[RLMSyncConfiguration alloc] initWithUser:user realmURL:url];
-    RLMRealm *r = [RLMRealm realmWithConfiguration:c error:&error];
+    RLMRealm *realm = [RLMRealm realmWithConfiguration:c error:&error];
     // Wait for login to succeed or fail.
     XCTAssert(dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC))) == 0,
               @"Timed out while trying to asynchronously open Realm for URL: %@", url);
-    return r;
+    return realm;
 }
 
 - (RLMRealm *)immediatelyOpenRealmForURL:(NSURL *)url user:(RLMSyncUser *)user {
     NSError *error = nil;
     RLMRealmConfiguration *c = [[RLMRealmConfiguration defaultConfiguration] copy];
     c.syncConfiguration = [[RLMSyncConfiguration alloc] initWithUser:user realmURL:url];
-    RLMRealm *r = [RLMRealm realmWithConfiguration:c error:&error];
+    RLMRealm *realm = [RLMRealm realmWithConfiguration:c error:&error];
     XCTAssertNil(error, @"Experienced an error opening the Realm at %@: %@", url, error);
-    return r;
+    return realm;
 }
 
 - (RLMSyncUser *)logInUserForCredential:(RLMSyncCredential *)credential
@@ -145,10 +146,10 @@ static NSURL *syncDirectoryForChildProcess() {
     [RLMSyncUser authenticateWithCredential:credential
                               authServerURL:url
                                onCompletion:^(RLMSyncUser *user, NSError *error) {
-                                   XCTAssertNotNil(user);
                                    XCTAssertNil(error,
                                                 @"Error when trying to log in a user: %@ (process: %@)",
                                                 error, process);
+                                   XCTAssertNotNil(user);
                                    theUser = user;
                                    [expectation fulfill];
                                }];
@@ -182,58 +183,66 @@ static NSURL *syncDirectoryForChildProcess() {
     }
 }
 
-- (void)runResetObjectServer {
-    [self.task terminate];
-    self.task = [[NSTask alloc] init];
-    self.task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
-    self.task.launchPath = @"/bin/sh";
-    self.task.arguments = @[@"build.sh", @"reset-object-server-between-tests"];
-    self.task.standardOutput = [NSPipe pipe];
-    [self.task launch];
-    [self.task waitUntilExit];
-}
-
-- (void)setUp {
-    [super setUp];
-    self.continueAfterFailure = NO;
-
-    if (!self.isParent) {
-        // Don't start the sync server if not the originating process.
-        // Do configure the sync manager to use a different directory than the parent process.
-        s_managerForTest = [[RLMSyncManager alloc] initWithCustomRootDirectory:syncDirectoryForChildProcess()];
+- (void)lazilyInitializeObjectServer {
+    if (!self.isParent || s_task) {
         return;
-    } else {
-        // FIXME: we need a more robust way of waiting till a test's server process has completed cleaning
-        // up before starting another test.
-        sleep(1);
-        [self runResetObjectServer];
-        s_managerForTest = [[RLMSyncManager alloc] initWithCustomRootDirectory:nil];
     }
-    [RLMSyncManager sharedManager].logLevel = RLMSyncLogLevelOff;
-    self.task = [[NSTask alloc] init];
-    self.task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
-    self.task.launchPath = @"/bin/sh";
-    self.task.arguments = @[@"build.sh", @"start-object-server"];
+    NSTask *task = [[NSTask alloc] init];
+    task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
+    task.launchPath = @"/bin/sh";
+    task.arguments = @[@"build.sh", @"start-object-server"];
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-    self.task.standardOutput = [NSPipe pipe];
-    [[self.task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+    task.standardOutput = [NSPipe pipe];
+    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([output containsString:@"Received: IDENT"]) {
             dispatch_semaphore_signal(sema);
         }
     }];
-    [self.task launch];
+    s_task = task;
+    [task launch];
     const NSTimeInterval timeout = 60;
-    XCTAssert(dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC))) == 0,
-              @"Object server did not launch properly, terminating test...");
+    BOOL wait_result = dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC))) == 0;
+    if (!wait_result) {
+        s_task = nil;
+        XCTFail(@"Server did not start up within the allotted timeout interval.");
+    }
+}
+
++ (void)tearDown {
+    [s_task terminate];
+    [super tearDown];
+}
+
++ (void)runResetObjectServer {
+    NSTask *task = [[NSTask alloc] init];
+    task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
+    task.launchPath = @"/bin/sh";
+    task.arguments = @[@"build.sh", @"reset-object-server-between-tests"];
+    task.standardOutput = [NSPipe pipe];
+    [task launch];
+    [task waitUntilExit];
+}
+
+- (void)setUp {
+    [super setUp];
+    self.continueAfterFailure = NO;
+    [self lazilyInitializeObjectServer];
+
+    if (self.isParent) {
+        XCTAssertNotNil(s_task, @"Test suite setup did not complete: server did not start properly.");
+        [RLMSyncTestCase runResetObjectServer];
+        s_managerForTest = [[RLMSyncManager alloc] initWithCustomRootDirectory:nil];
+    } else {
+        // Configure the sync manager to use a different directory than the parent process.
+        s_managerForTest = [[RLMSyncManager alloc] initWithCustomRootDirectory:syncDirectoryForChildProcess()];
+    }
+    [RLMSyncManager sharedManager].logLevel = RLMSyncLogLevelOff;
 }
 
 - (void)tearDown {
     [s_managerForTest prepareForDestruction];
-    if (self.isParent) {
-        [self runResetObjectServer];
-    }
     s_managerForTest = nil;
     [super tearDown];
 }
