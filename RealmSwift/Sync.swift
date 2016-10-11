@@ -114,6 +114,12 @@ public struct SyncConfiguration {
         return config
     }
 
+    /**
+     Initialize a sync configuration with a user and a Realm URL.
+
+     - warning: The URL must be absolute (e.g. `realms://example.com/~/foo`), and cannot end with
+                `.realm`, `.realm.lock` or `.realm.management`.
+     */
     public init(user: SyncUser, realmURL: URL) {
         self.user = user
         self.realmURL = realmURL
@@ -229,6 +235,12 @@ public struct SyncConfiguration {
         return config
     }
 
+    /**
+     Initialize a sync configuration with a user and a Realm URL.
+
+     - warning: The URL must be absolute (e.g. `realms://example.com/~/foo`), and cannot end with
+                `.realm`, `.realm.lock` or `.realm.management`.
+     */
     public init(user: SyncUser, realmURL: NSURL) {
         self.user = user
         self.realmURL = realmURL
