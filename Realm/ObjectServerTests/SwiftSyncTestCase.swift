@@ -51,7 +51,7 @@ class SwiftSyncTestCase: RLMSyncTestCase {
             semaphore.signal()
         }
         SyncManager.shared().setSessionCompletionNotifier(basicBlock)
-        let config = Realm.Configuration(syncConfiguration: (user, url))
+        let config = Realm.Configuration(syncConfiguration: SyncConfiguration(user: user, realmURL: url))
         let realm = try Realm(configuration: config)
         // FIXME: Perhaps we should have a reasonable timeout here, instead of allowing bad code to stall forever.
         _ = semaphore.wait(timeout: .distantFuture)
@@ -59,7 +59,7 @@ class SwiftSyncTestCase: RLMSyncTestCase {
     }
 
     func immediatelyOpenRealm(url: URL, user: SyncUser) throws -> Realm {
-        return try Realm(configuration: Realm.Configuration(syncConfiguration: (user, url)))
+        return try Realm(configuration: Realm.Configuration(syncConfiguration: SyncConfiguration(user: user, realmURL: url)))
     }
 
     func synchronouslyLogInUser(for credential: Credential,

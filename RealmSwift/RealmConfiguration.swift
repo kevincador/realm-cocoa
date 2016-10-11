@@ -54,7 +54,7 @@ extension Realm {
 
         /**
          Creates a `Configuration` which can be used to create new `Realm` instances.
-         
+
          - note: The `fileURL`, `inMemoryIdentifier`, and `syncConfiguration` parameters are mutually exclusive. Only
                  set one of them, or none if you wish to use the default file URL.
 
@@ -283,7 +283,7 @@ extension Realm {
 
         /**
          Creates a `Configuration` which can be used to create new `Realm` instances.
-     
+
          - note: The `fileURL`, `inMemoryIdentifier`, and `syncConfiguration` parameters are mutually exclusive. Only
                  set one of them, or none if you wish to use the default file URL.
 

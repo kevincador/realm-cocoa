@@ -207,7 +207,7 @@ public struct SyncConfiguration {
 
     /**
      The URL of the Realm on the Realm Object Server that this configuration should open.
-     
+
      - warning: The URL must be absolute (e.g. `realms://example.com/~/foo`), and cannot end with
                 `.realm`, `.realm.lock` or `.realm.management`.
      */
