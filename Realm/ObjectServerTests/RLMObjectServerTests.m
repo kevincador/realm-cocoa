@@ -34,8 +34,8 @@
                                                    server:[RLMSyncTestCase authServerURL]];
     RLMSyncUser *secondUser = [self logInUserForCredential:[RLMSyncTestCase basicCredential:NO]
                                                     server:[RLMSyncTestCase authServerURL]];
-    // Logging in with equivalent credentials should return the same user object instance.
-    XCTAssertEqual(firstUser, secondUser);
+    // Two users created with the same credential should resolve to the same actual user.
+    XCTAssertTrue([firstUser.identity isEqualToString:secondUser.identity]);
 
     // Trying to "create" a username/password account that already exists should cause an error.
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
@@ -72,7 +72,7 @@
                                               server:[RLMObjectServerTests authServerURL]];
     XCTAssertNotNil(user);
     XCTAssertEqual([[RLMSyncUser all] count], 1U);
-    XCTAssertTrue([[RLMSyncUser all] containsObject:user]);
+    XCTAssertTrue([[[RLMSyncUser all] firstObject].identity isEqualToString:user.identity]);
 }
 
 #pragma mark - Sync
@@ -90,7 +90,9 @@
                                               server:[RLMObjectServerTests authServerURL]];
     NSError *error = nil;
     NSURL *url = [NSURL URLWithString:@"realm://localhost:9080/testSyncWithAdminToken"];
-    RLMRealm *realm = [self openRealmForURL:url user:user error:&error];
+    RLMRealmConfiguration *c = [[RLMRealmConfiguration defaultConfiguration] copy];
+    c.syncConfiguration = [[RLMSyncConfiguration alloc] initWithUser:user realmURL:url];
+    RLMRealm *realm = [RLMRealm realmWithConfiguration:c error:&error];
     XCTAssertNil(error);
     XCTAssertTrue(realm.isEmpty);
 }
