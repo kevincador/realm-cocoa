@@ -412,6 +412,7 @@ case "$COMMAND" in
         rm -rf "~/Library/Application Support/xctest-child"
         exit 0
         ;;
+
     "reset-object-server")
         kill_object_server
         package="${source_root}/sync"

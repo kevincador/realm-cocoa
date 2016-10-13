@@ -20,22 +20,10 @@
 
 #import "RLMSyncUser+ObjectServerTests.h"
 
-static NSString *reduceMethodName(NSString *fullName) {
-    // 'function' is expected to be an Objective-C method name: "[MyClass fooBarBaz]"
-    NSString *reduced = [fullName substringWithRange:NSMakeRange(1, [fullName length] - 2)];
-    return [reduced componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]][1];
-}
-
-static NSURL *makeRealmURL(NSString *methodName, NSString *identifier) {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"realm://localhost:9080/~/%@%@",
-                                 [reduceMethodName(methodName) stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]],
-                                 identifier ?: @""]];
-}
-
-#define CUSTOM_REALM_URL(realm_identifier) makeRealmURL(@(__FUNCTION__), realm_identifier)
-
+#define ACCOUNT_NAME() NSStringFromSelector(_cmd)
+#define CUSTOM_REALM_URL(realm_identifier) \
+    [NSURL URLWithString:[NSString stringWithFormat:@"realm://localhost:9080/~/%@%@", ACCOUNT_NAME(), realm_identifier]]
 #define REALM_URL() CUSTOM_REALM_URL(@"")
-#define ACCOUNT_NAME() reduceMethodName(@(__FUNCTION__))
 
 @interface RLMObjectServerTests : RLMSyncTestCase
 @end
