@@ -68,6 +68,7 @@
 		1A0512721D873F3300806AEC /* RLMSyncConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A3623661D8384BA00945A54 /* RLMSyncConfiguration.mm */; };
 		1A0512761D8746CD00806AEC /* RLMSyncConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3623651D8384BA00945A54 /* RLMSyncConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A0512771D8746CD00806AEC /* RLMSyncConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3623651D8384BA00945A54 /* RLMSyncConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A1536481DB0408A00C0EC93 /* RLMSyncUser+ObjectServerTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AF64DD11DA304A90081EB15 /* RLMSyncUser+ObjectServerTests.mm */; };
 		1A2D7A521DA5BCEC006AD7D6 /* RLMMultiProcessTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 027A4D2B1AB1012500AA46F9 /* RLMMultiProcessTestCase.m */; };
 		1A3623681D8384BA00945A54 /* RLMSyncConfiguration.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A3623661D8384BA00945A54 /* RLMSyncConfiguration.mm */; };
 		1A4FFC991D35A71000B4B65C /* RLMSyncUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A4FFC971D35A71000B4B65C /* RLMSyncUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2286,7 +2287,7 @@
 				E86E61241D91E4E200DC2419 /* RLMTestCase.m in Sources */,
 				1AF64DCF1DA3042B0081EB15 /* RLMSyncManager+ObjectServerTests.m in Sources */,
 				1A2D7A521DA5BCEC006AD7D6 /* RLMMultiProcessTestCase.m in Sources */,
-				1AF64DD41DA304B10081EB15 /* RLMSyncUser+ObjectServerTests.mm in Sources */,
+				1A1536481DB0408A00C0EC93 /* RLMSyncUser+ObjectServerTests.mm in Sources */,
 				1AA5AE9C1D98A68E00ED8C27 /* RLMSyncTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
