@@ -70,6 +70,13 @@ using namespace realm;
     return nil;
 }
 
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass:[RLMSyncUser class]]) {
+        return NO;
+    }
+    return _user == ((RLMSyncUser *)object)->_user;
+}
+
 + (void)authenticateWithCredential:(RLMSyncCredential *)credential
                      authServerURL:(NSURL *)authServerURL
                       onCompletion:(RLMUserCompletionBlock)completion {

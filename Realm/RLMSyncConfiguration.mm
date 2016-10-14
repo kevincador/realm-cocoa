@@ -68,6 +68,16 @@ static BOOL isValidRealmURL(NSURL *url) {
     return self;
 }
 
+- (BOOL)isEqual:(id)object {
+    if (![object isKindOfClass:[RLMSyncConfiguration class]]) {
+        return NO;
+    }
+    RLMSyncConfiguration *that = (RLMSyncConfiguration *)object;
+    return ([self.realmURL isEqual:that.realmURL]
+            && [self.user isEqual:that.user]
+            && self.stopPolicy == that.stopPolicy);
+}
+
 - (realm::SyncConfig)rawConfiguration {
     return *_config;
 }
