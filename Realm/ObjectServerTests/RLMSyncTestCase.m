@@ -187,6 +187,7 @@ static NSURL *syncDirectoryForChildProcess() {
     if (!self.isParent || s_task) {
         return;
     }
+    [RLMSyncTestCase runResetObjectServer:YES];
     NSTask *task = [[NSTask alloc] init];
     task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
     task.launchPath = @"/bin/sh";
@@ -215,11 +216,11 @@ static NSURL *syncDirectoryForChildProcess() {
     [super tearDown];
 }
 
-+ (void)runResetObjectServer {
++ (void)runResetObjectServer:(BOOL)initial {
     NSTask *task = [[NSTask alloc] init];
     task.currentDirectoryPath = [[RLMSyncTestCase rootRealmCocoaURL] path];
     task.launchPath = @"/bin/sh";
-    task.arguments = @[@"build.sh", @"reset-object-server-between-tests"];
+    task.arguments = @[@"build.sh", initial ? @"reset-object-server" : @"reset-object-server-between-tests"];
     task.standardOutput = [NSPipe pipe];
     [task launch];
     [task waitUntilExit];
@@ -232,7 +233,7 @@ static NSURL *syncDirectoryForChildProcess() {
 
     if (self.isParent) {
         XCTAssertNotNil(s_task, @"Test suite setup did not complete: server did not start properly.");
-        [RLMSyncTestCase runResetObjectServer];
+        [RLMSyncTestCase runResetObjectServer:NO];
         s_managerForTest = [[RLMSyncManager alloc] initWithCustomRootDirectory:nil];
     } else {
         // Configure the sync manager to use a different directory than the parent process.

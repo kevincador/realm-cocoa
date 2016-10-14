@@ -286,7 +286,7 @@ fi
 
 kill_object_server() {
     (pgrep -f realm-object-server || true) | while read pid; do
-    kill $pid 2>/dev/null
+        kill $pid 2>/dev/null
     done
 }
 
@@ -825,7 +825,6 @@ case "$COMMAND" in
 
     "verify-osx-object-server")
         sh build.sh download-object-server
-        sh build.sh reset-object-server
         sh build.sh test-osx-object-server
         exit 0
         ;;
