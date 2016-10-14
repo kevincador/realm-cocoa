@@ -149,12 +149,26 @@ public final class Realm {
     /**
      Commits all write operations in the current write transaction, and ends the transaction.
 
+     By default all registered notification blocks are called following a write
+     transaction, including those added on the same thread as the write transaction
+     was performed on. This can be undesireable when the notification block is used
+     to update the UI to reflect some changes, but the write transaction is saving
+     changes already made in the UI. If the work done in the notification block is
+     idempotetent then this is harmless (although a waste of CPU time), but when
+     using fine-grained change notification it can result in changes being
+     double-applied in unsafe ways.
+
+     The tokens passed to this function must be for notifications for this Realm
+     which were added on the same thread as the write transaction is being
+     performed on. Notifications for different threads cannot be skipped using
+     this method.
+
      - warning: This method may only be called during a write transaction.
 
      - throws: An `NSError` if the transaction could not be written.
      */
-    public func commitWrite() throws {
-        try rlmRealm.commitWriteTransaction()
+    public func commitWrite(withoutNotifying tokens: [NotificationToken] = []) throws {
+        try rlmRealm.commitWriteTransactionWithoutNotifying(tokens)
     }
 
     /**
@@ -756,9 +770,9 @@ public final class Realm {
      until the current write transaction completes.
 
      Before beginning the write transaction, `beginWrite` updates the
-     `Realm` instance to the latest Realm version, as if `refresh()` had been called, and
-     generates notifications if applicable. This has no effect if the Realm
-     was already up to date.
+     `Realm` instance to the latest Realm version, as if `refresh()` had been
+     called, and generates notifications if applicable. This has no effect if
+     the Realm was already up to date.
 
      It is rarely a good idea to have write transactions span multiple cycles of
      the run loop, but if you do wish to do so you will need to ensure that the
@@ -772,12 +786,26 @@ public final class Realm {
     /**
      Commits all write operations in the current write transaction, and ends the transaction.
 
+     By default all registered notification blocks are called following a write
+     transaction, including those added on the same thread as the write transaction
+     was performed on. This can be undesireable when the notification block is used
+     to update the UI to reflect some changes, but the write transaction is saving
+     changes already made in the UI. If the work done in the notification block is
+     idempotetent then this is harmless (although a waste of CPU time), but when
+     using fine-grained change notification it can result in changes being
+     double-applied in unsafe ways.
+
+     The tokens passed to this function must be for notifications for this Realm
+     which were added on the same thread as the write transaction is being
+     performed on. Notifications for different threads cannot be skipped using
+     this method.
+
      - warning: This method may only be called during a write transaction.
 
      - throws: An `NSError` if the transaction could not be written.
      */
-    public func commitWrite() throws {
-        try rlmRealm.commitWriteTransaction()
+    public func commitWrite(withoutNotifying tokens: [NotificationToken] = []) throws {
+        try rlmRealm.commitWriteTransactionWithoutNotifying(tokens)
     }
 
     /**
