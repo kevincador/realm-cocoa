@@ -14,7 +14,7 @@
 		227D20F61CB609A1008F641B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227D20F11CB609A1008F641B /* LaunchScreen.xib */; };
 		227D20F71CB609A1008F641B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227D20F11CB609A1008F641B /* LaunchScreen.xib */; };
 		227D20F81CB609A1008F641B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227D20F11CB609A1008F641B /* LaunchScreen.xib */; };
-		27F824B119611EFF4A9EE8A0 /* Pods_ReactKitTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00630224166C0631FC7AD2B /* Pods_ReactKitTableView.framework */; };
+		2400CF0026AD08F2A3F2B84B /* Pods_ReactKitTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4C7549CC5708DD7462ED95E /* Pods_ReactKitTableView.framework */; };
 		3FC898FF1A1414110067CBEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC898FE1A1414110067CBEC /* ViewController.swift */; };
 		5D8DD54D1C62C5A4005077F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8DD5491C62C5A4005077F2 /* AppDelegate.swift */; };
 		5D8DD54E1C62C5A4005077F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8DD54A1C62C5A4005077F2 /* Images.xcassets */; };
@@ -168,12 +168,12 @@
 		5D8DD54A1C62C5A4005077F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5D8DD54B1C62C5A4005077F2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D8DD54C1C62C5A4005077F2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		5FC3B714C9E93753A534F397 /* Pods-ReactKitTableView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactKitTableView.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView.release.xcconfig"; sourceTree = "<group>"; };
+		997A3AC7DB51A5D87B4B1C26 /* Pods-ReactKitTableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactKitTableView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView.debug.xcconfig"; sourceTree = "<group>"; };
 		9C318E8C1CA42C7800879076 /* GettingStarted.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GettingStarted.playground; sourceTree = "<group>"; };
+		A4C7549CC5708DD7462ED95E /* Pods_ReactKitTableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactKitTableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C07E5D791B15001500ED625C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09C490F1A605A4800638C9F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBC0988E1843A2BB42BC405F /* Pods-ReactKitTableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactKitTableView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView.debug.xcconfig"; sourceTree = "<group>"; };
-		D00630224166C0631FC7AD2B /* Pods_ReactKitTableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactKitTableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E769A59F814E99CD77048861 /* Pods-ReactKitTableView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactKitTableView.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView.release.xcconfig"; sourceTree = "<group>"; };
 		E886FB601A12A6FC00CB2D0B /* GroupedTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupedTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E886FB631A12A73E00CB2D0B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E886FB641A12A73E00CB2D0B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			files = (
 				5D8DD55E1C62C658005077F2 /* Realm.framework in Frameworks */,
 				5D8DD55B1C62C655005077F2 /* RealmSwift.framework in Frameworks */,
-				27F824B119611EFF4A9EE8A0 /* Pods_ReactKitTableView.framework in Frameworks */,
+				2400CF0026AD08F2A3F2B84B /* Pods_ReactKitTableView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,14 +298,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2E5A12793BFB7BE6066D95F3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D00630224166C0631FC7AD2B /* Pods_ReactKitTableView.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		5D8DD5481C62C5A4005077F2 /* ReactKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,13 +309,21 @@
 			path = ReactKit;
 			sourceTree = "<group>";
 		};
-		AFE1C4862B0367EA53873281 /* Pods */ = {
+		789E0E3DD349FD0B21F56322 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CBC0988E1843A2BB42BC405F /* Pods-ReactKitTableView.debug.xcconfig */,
-				5FC3B714C9E93753A534F397 /* Pods-ReactKitTableView.release.xcconfig */,
+				997A3AC7DB51A5D87B4B1C26 /* Pods-ReactKitTableView.debug.xcconfig */,
+				E769A59F814E99CD77048861 /* Pods-ReactKitTableView.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		88490FD72D6C9E85511F3AD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4C7549CC5708DD7462ED95E /* Pods_ReactKitTableView.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E805758C19BA55E600376620 = {
@@ -342,8 +342,8 @@
 				0295B90519D103180036D6C3 /* RealmSwift */,
 				E8CB088F19BA6B000018434A /* Simple */,
 				E8CB089419BA6B080018434A /* TableView */,
-				AFE1C4862B0367EA53873281 /* Pods */,
-				2E5A12793BFB7BE6066D95F3 /* Frameworks */,
+				789E0E3DD349FD0B21F56322 /* Pods */,
+				88490FD72D6C9E85511F3AD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -440,14 +440,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D8DD5471C62C572005077F2 /* Build configuration list for PBXNativeTarget "ReactKitTableView" */;
 			buildPhases = (
-				AD9DBF5E6EADA7363426390A /* Check Pods Manifest.lock */,
+				1F12E45D1D6D4FACE651FCA2 /* [CP] Check Pods Manifest.lock */,
 				5D8DD5321C62C572005077F2 /* Sources */,
 				5D8DD5331C62C572005077F2 /* Frameworks */,
 				5D8DD5341C62C572005077F2 /* Resources */,
 				5D8DD55D1C62C655005077F2 /* Embed Frameworks */,
 				5D8DD5621C62C835005077F2 /* Strip Framework Architectures */,
-				05A7950D6354A9E990818012 /* Embed Pods Frameworks */,
-				A7B1546CF3BAE226A53068B3 /* Copy Pods Resources */,
+				8B8A3602829FC184F9F4337A /* [CP] Embed Pods Frameworks */,
+				5CE887A2A288F3EE7CE59E44 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -596,7 +596,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Realm;
 				TargetAttributes = {
 					5D8DD5351C62C572005077F2 = {
@@ -616,6 +616,7 @@
 					};
 					E8D3F2521A11765200620884 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 					};
 					E8F14D091CF8FD0C00564AF5 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -713,19 +714,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05A7950D6354A9E990818012 /* Embed Pods Frameworks */ = {
+		1F12E45D1D6D4FACE651FCA2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5CE887A2A288F3EE7CE59E44 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5D8DD5621C62C835005077F2 /* Strip Framework Architectures */ = {
@@ -743,34 +759,19 @@
 			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
 			showEnvVarsInLog = 0;
 		};
-		A7B1546CF3BAE226A53068B3 /* Copy Pods Resources */ = {
+		8B8A3602829FC184F9F4337A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD9DBF5E6EADA7363426390A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactKitTableView/Pods-ReactKitTableView-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C06D6CCE1B016A590066C324 /* Strip Framework Architectures */ = {
@@ -864,8 +865,9 @@
 /* Begin XCBuildConfiguration section */
 		5D8DD5451C62C572005077F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBC0988E1843A2BB42BC405F /* Pods-ReactKitTableView.debug.xcconfig */;
+			baseConfigurationReference = 997A3AC7DB51A5D87B4B1C26 /* Pods-ReactKitTableView.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -879,8 +881,9 @@
 		};
 		5D8DD5461C62C572005077F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FC3B714C9E93753A534F397 /* Pods-ReactKitTableView.release.xcconfig */;
+			baseConfigurationReference = E769A59F814E99CD77048861 /* Pods-ReactKitTableView.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				COPY_PHASE_STRIP = NO;
@@ -906,8 +909,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -916,6 +921,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -950,8 +956,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -959,6 +967,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -968,6 +977,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1117,6 +1127,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1126,6 +1137,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.realm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1133,11 +1145,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Backlink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.realm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1145,6 +1159,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1168,6 +1183,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

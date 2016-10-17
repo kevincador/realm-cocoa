@@ -36,28 +36,37 @@ class Person: Object {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notificationToken: NotificationToken?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
-
+        
         do {
-            try NSFileManager.defaultManager().removeItemAtURL(Realm.Configuration.defaultConfiguration.fileURL!)
+            try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
         } catch {}
-
-        let realm = try! Realm()
-        try! realm.write {
-            realm.create(Person.self, value: ["John", [["Fido", 1]]])
-            realm.create(Person.self, value: ["Mary", [["Rex", 2]]])
+        
+        
+        notificationToken = try! Realm().addNotificationBlock { note, realm in
+            let allDogs = realm.objects(Dog.self)
+            
+            let att = try! FileManager.default.attributesOfItem(atPath: Realm.Configuration.defaultConfiguration.fileURL!.path)
+            print("Realm file size \(allDogs.count) dogs : \(att[FileAttributeKey.size])")
         }
-
-        // Log all dogs and their owners using the "owners" inverse relationship
-        let allDogs = realm.objects(Dog.self)
-        for dog in allDogs {
-            let ownerNames = dog.owners.map { $0.name }
-            print("\(dog.name) has \(ownerNames.count) owners (\(ownerNames))")
+        
+        for _ in 1...10000 {
+            DispatchQueue.global().async {
+                autoreleasepool {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        realm.create(Person.self, value: ["John", [["Fido", 1]]])
+                    }
+                    realm.invalidate()
+                }
+            }
         }
+        
         return true
     }
 }
